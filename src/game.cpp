@@ -69,6 +69,7 @@ Game::Game(unsigned int WIDTH, unsigned int HEIGHT){
     ymax = this->HEIGHT-1; ymin = 3;
 
     snake.push_back(Coor(0, 0, xmax, ymax, xmin, ymin));
+    food = new Coor(1, 1, xmax, ymax, xmin, ymin);
     reset();
 
     running = true;
@@ -176,6 +177,7 @@ void Game::update_clock(){
 }
 
 void Game::update_movement(){
+
     // Re-print food
     uvector.push_back(Uelement(food->x, food->y, uvector.full));
 
@@ -219,6 +221,12 @@ void Game::update_movement(){
         spawn_food();
         update_length(true);
     }
+
+    /*// Print coors
+    std::string print_coors = "("+std::to_string(head->x)+","+
+                                  std::to_string(head->y)+")";
+    uvector.push_back(Uelement(1, HEIGHT, print_coors));*/
+
 }
 
 void Game::spawn_food(){
@@ -232,9 +240,9 @@ void Game::spawn_food(){
     }while(coor_in_snake(*food));
     uvector.push_back(Uelement(food->x, food->y, uvector.full));
 
-    std::string print_coors = "("+std::to_string(food->x)+","+
-                                  std::to_string(food->y)+")";
-    uvector.push_back(Uelement(1, HEIGHT, print_coors));
+    //std::string print_coors = "("+std::to_string(food->x)+","+
+    //                              std::to_string(food->y)+")";
+    //uvector.push_back(Uelement(1, HEIGHT, print_coors));
 }
 
 // State functions
@@ -280,7 +288,7 @@ void Game::reset(){
     
     snake.clear();
 
-    snake.push_back(Coor(WIDTH/2, HEIGHT/2, xmax, ymax, xmin, ymin));
+    snake.push_back(Coor((WIDTH/4)*2, HEIGHT/2, xmax, ymax, xmin, ymin));
     head = &snake[0]; tail = head;
 
     gtime = 0;
@@ -289,7 +297,6 @@ void Game::reset(){
     update_length(false);
     update_clock();
 
-    food = new Coor(WIDTH/2, HEIGHT/2, xmax, ymax, xmin, ymin);
     spawn_food();
 }
 
