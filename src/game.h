@@ -41,6 +41,7 @@ public:
     Uvector();
 
     std::string full;
+    std::string shaded;
     std::string blank;
 
     void push_back(Uelement e);
@@ -68,6 +69,10 @@ public:
     Coor * tail;
     Coor * food;
     std::vector<Coor> snake;
+
+    std::vector<std::string> colors;
+    int cidx;
+    int r,g,b;
 
     // Screen coords to update
     Uvector uvector;

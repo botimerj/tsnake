@@ -35,7 +35,7 @@ Term::~Term(){
 
 void Term::render(){
     std::string rstring(game->render());
-    write(STDOUT_FILENO, rstring.c_str(), rstring.size());
+    ssize_t res = write(STDOUT_FILENO, rstring.c_str(), rstring.size());
 }
 
 bool Term::is_running(){
@@ -78,7 +78,7 @@ void Term::die(const char *s) {
 void Term::listen(){
     char c;
     while (1) {
-        char c = '\0';
+        //char c = '\0';
         if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN) die("read");
         if (c == '\033') break;
 

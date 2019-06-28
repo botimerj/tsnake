@@ -1,5 +1,6 @@
 
 CC 		:= g++
+ARGS	:= -O2
 INCLUDE := -Isrc/
 LINK	:= -L/usr/lib/x86_64-linux-gnu/ -lpthread
 SRC 	:= src/*.cpp
@@ -7,7 +8,7 @@ SRC 	:= src/*.cpp
 all: tsnake 
 
 tsnake: $(SRC)
-	$(CC) $(INCLUDE) $(SRC) tsnake.cpp -o tsnake $(LINK) 
+	$(CC) $(ARGS) $(INCLUDE) $(SRC) tsnake.cpp -o tsnake $(LINK) 
 
 clean:
 	rm tsnake 
